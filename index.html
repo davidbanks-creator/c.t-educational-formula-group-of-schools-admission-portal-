@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C.T EDUCATIONAL FORMULA GROUP OF SCHOOLS</title>
+<style>
+  body { font-family: Arial, sans-serif; margin:0; background:#fff8f0; color:#333; }
+  
+  header { background: linear-gradient(135deg, #ff0000, #008000); color:white; padding:30px; text-align:center; position:relative;}
+  header::before, header::after { content:"🎄"; font-size:40px; position:absolute; top:10px;}
+  header::before{left:20px;} header::after{right:20px;}
+
+  nav { display:flex; justify-content:center; background:#ff69b4; flex-wrap:wrap;}
+  nav a { color:white; text-decoration:none; padding:15px 20px; display:block; font-weight:bold;}
+  nav a:hover { background:#ff1493; }
+
+  .container { padding:20px; max-width:1000px; margin:auto;}
+  h2 { color:#ff4500; }
+
+  .info { margin-top:20px; padding:20px; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.1); background:#f0f8ff; position:relative;}
+  .info::before { content:"❄️"; position:absolute; top:10px; right:10px; font-size:24px; }
+
+  .contact-btn { display:inline-block; margin:10px 10px 0 0; padding:12px 25px; background:#ff6347; color:white; border:none; border-radius:8px; cursor:pointer; text-decoration:none; font-weight:bold; font-size:16px;}
+  .contact-btn:hover { background:#ff4500; }
+
+  .contact-buttons { display:flex; flex-wrap:wrap; margin-top:10px;}
+  .contact-buttons a { flex:1 1 150px; margin:5px; text-align:center; }
+
+  footer { text-align:center; padding:20px; background: linear-gradient(135deg, #008000, #ff0000); color:white; margin-top:30px; position:relative;}
+  footer::before, footer::after { content:"🎁"; font-size:24px; position:absolute; top:10px;}
+  footer::before{left:20px;} footer::after{right:20px;}
+
+  @media(max-width:600px){ nav{flex-direction:column;} .contact-buttons{flex-direction:column;} input{width:100% !important;} }
+  input[type="text"]{ width:80%; padding:10px; margin-top:10px; border-radius:5px; border:1px solid #ccc;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>C.T EDUCATIONAL FORMULA GROUP OF SCHOOLS</h1>
+  <p>Providing Quality Education for a Brighter Future 🎄</p>
+</header>
+
+<nav>
+  <a href="#about">About Us</a>
+  <a href="#admission">Admission</a>
+  <a href="#enroll">Enroll Now</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<div class="container" id="about">
+  <h2>About Us</h2>
+  <div class="info">
+    <p>C.T EDUCATIONAL FORMULA GROUP OF SCHOOLS is committed to delivering top-quality education, building strong foundations for students, and nurturing excellence in academics, sports, and arts. ❄️</p>
+  </div>
+</div>
+
+<div class="container" id="admission">
+  <h2>Admission</h2>
+  <div class="info">
+    <p>We welcome students of all ages. Click a platform below to contact us and start the admission process. 🎄</p>
+    <div class="contact-buttons">
+      <a class="contact-btn" href="https://wa.me/2347032963430" target="_blank">WhatsApp</a>
+      <a class="contact-btn" href="https://t.me/+2347032963430" target="_blank">Telegram</a>
+    </div>
+  </div>
+</div>
+
+<div class="container" id="enroll">
+  <h2>Enroll Now</h2>
+  <div class="info">
+    <p>Ready to join C.T EDUCATIONAL FORMULA GROUP OF SCHOOLS? Ask our AI assistant any question about enrollment or school details! ❄️</p>
+    
+    <div class="contact-buttons">
+      <a class="contact-btn" href="https://wa.me/2347032963430" target="_blank">WhatsApp</a>
+      <a class="contact-btn" href="https://t.me/+2347032963430" target="_blank">Telegram</a>
+    </div>
+
+    <!-- AI Chatbot -->
+    <h3 style="margin-top:20px;">Smart AI Admission Assistant 🤖</h3>
+    <div id="chatbox" style="border:1px solid #ccc; padding:10px; border-radius:8px; height:300px; overflow-y:auto; background:#fff;"></div>
+    <input type="text" id="userInput" placeholder="Ask about admissions...">
+    <button onclick="sendMessage()" style="padding:10px 15px; background:#ff6347; color:white; border:none; border-radius:5px; cursor:pointer;">Send</button>
+  </div>
+</div>
+
+<div class="container" id="contact">
+  <h2>Contact Us</h2>
+  <div class="info">
+    <p>Phone: <span id="phone">07032963430</span></p>
+    <div class="contact-buttons">
+      <a class="contact-btn" href="https://wa.me/2347032963430" target="_blank">WhatsApp</a>
+      <a class="contact-btn" href="https://t.me/+2347032963430" target="_blank">Telegram</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 C.T EDUCATIONAL FORMULA GROUP OF SCHOOLS. All Rights Reserved.
+</footer>
+
+<script>
+async function sendMessage() {
+  const inputField = document.getElementById("userInput");
+  const userText = inputField.value.trim();
+  if (!userText) return;
+
+  const chatbox = document.getElementById("chatbox");
+  chatbox.innerHTML += `<p><strong>You:</strong> ${userText}</p>`;
+  inputField.value = "";
+
+  // OpenAI API call
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer sk-1234abcd5678efgh"
+    },
+    body: JSON.stringify({
+      model: "gpt-4",
+      messages: [
+        { role: "system", content: "You are a helpful AI assistant for a school enrollment portal." },
+        { role: "user", content: userText }
+      ],
+      max_tokens: 200
+    })
+  });
+
+  const data = await response.json();
+  const aiReply = data.choices[0].message.content;
+  chatbox.innerHTML += `<p><strong>AI:</strong> ${aiReply}</p>`;
+  chatbox.scrollTop = chatbox.scrollHeight;
+}
+</script>
+
+</body>
+</html>
